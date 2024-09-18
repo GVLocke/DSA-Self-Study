@@ -1,0 +1,2 @@
+# Data Structures and Algorithms Self Study
+I've got a lighter semester this fall so I'd thought I'd go through the [Neetcode DSA for Beginners course](https://neetcode.io/courses). These are some Neetcode specific projects that I've done, like implementing particular data structures. You can find my Leetcode solutions [here](https://github.com/GVLocke/leetcode?tab=readme-ov-file).
