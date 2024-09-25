@@ -4,12 +4,6 @@ class ListNode:
     def __init__(self, value: int, next: 'ListNode' = None) -> None:
         self.value = value
         self.next = next
-    
-    def setNext(self, next: 'ListNode') -> None:
-        self.next = next
-    
-    def setValue(self, value: int) -> None:
-        self.value = value
 
 class LinkedList:
     
@@ -30,14 +24,14 @@ class LinkedList:
 
     def insertHead(self, val: int) -> None:
         newHead = ListNode(val, self.head.next)
-        self.head.setNext(newHead)
+        self.head.next = newHead
         # if the list is empty, we need to make the newHead the tail instead of the dummy node
         if self.head == self.tail:
             self.tail = newHead
 
     def insertTail(self, val: int) -> None:
         newTail = ListNode(val)
-        self.tail.setNext(newTail)
+        self.tail.next = newTail
         self.tail = newTail
 
     def remove(self, index: int) -> bool:
@@ -53,7 +47,7 @@ class LinkedList:
             return False
         if self.tail == currentNode.next:
             self.tail = currentNode
-        currentNode.setNext(currentNode.next.next)
+        currentNode.next = currentNode.next.next
         return True
 
     def getValues(self) -> List[int]:
@@ -63,6 +57,33 @@ class LinkedList:
             returnList.append(currentNode.value)
             currentNode = currentNode.next
         return returnList
+    
+    def addAtIndex(self, index: int, val: int) -> None:
+        counter = 0
+        currentNode = self.head
+        # if the list is empty
+        if not currentNode.next:
+            if index > 0 or index < 0:
+                return
+            if index == 0:
+                self.head.next = ListNode(val)
+                self.tail = self.head.next
+                return
+        while currentNode.next and counter < index:
+            currentNode = currentNode.next
+            counter += 1
+        if currentNode.next or counter == index:
+            newNode = ListNode(val, currentNode.next)
+            currentNode.next = newNode
+            if currentNode == self.tail:
+                self.tail = currentNode.next
+            return
+        if not currentNode.next and counter < index:
+            return 
+
 
 myList = LinkedList()
-myList.get(0)
+myList.addAtIndex(0, 10)
+myList.addAtIndex(0, 20)
+myList.addAtIndex(1, 30)
+print(myList.get(0))
